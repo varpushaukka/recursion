@@ -115,14 +115,9 @@
   (if (empty? a-seq)
     (cons [] a-seq)
     (cons a-seq (tails (rest a-seq)))))
-  
+
 (defn inits [a-seq]
-  (cons [] 
-        (map (fn init [x] 
-               (if (zero? x)
-                 []
-                 (conj (init (dec x)) x)))
-             a-seq)))
+  (reverse (map reverse (tails (reverse a-seq)))))
 
 (defn rotations [a-seq]
   (if (empty? a-seq)
@@ -134,7 +129,7 @@
         (recur (conj result (concat (drop r a-seq) (take r a-seq))) (dec r))))))
   
 (defn my-frequencies-helper [freqs a-seq]
-  (if (empty? a-seq) 
+  (if (empty? a-seq)
     freqs
     (let [fr (first a-seq)]
       (if (get freqs fr)
@@ -178,7 +173,7 @@
     ))
 
 (defn split-into-monotonics [a-seq]
-  [:-])
+  (inits a-seq))
 
 (defn permutations [a-set]
   [:-])
